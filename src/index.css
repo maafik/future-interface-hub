@@ -1,0 +1,394 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cyber Future Design System - Interface of the Future */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Cyber Dark Background System */
+    --background: 220 26% 6%;
+    --foreground: 180 100% 90%;
+
+    /* Holographic Cards */
+    --card: 220 26% 8%;
+    --card-foreground: 180 100% 90%;
+    --card-border: 180 100% 50%;
+
+    /* Terminal Popover */
+    --popover: 220 26% 4%;
+    --popover-foreground: 180 100% 90%;
+
+    /* Neon Primary - Electric Cyan */
+    --primary: 180 100% 50%;
+    --primary-foreground: 220 26% 6%;
+    --primary-glow: 180 100% 70%;
+
+    /* Neon Secondary - Electric Purple */
+    --secondary: 270 100% 60%;
+    --secondary-foreground: 220 26% 6%;
+    --secondary-glow: 270 100% 80%;
+
+    /* Terminal Green */
+    --muted: 120 100% 25%;
+    --muted-foreground: 120 100% 70%;
+
+    /* Neon Accent - Electric Pink */
+    --accent: 300 100% 60%;
+    --accent-foreground: 220 26% 6%;
+    --accent-glow: 300 100% 80%;
+
+    /* Danger Red */
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 220 26% 6%;
+
+    /* Cyber Borders */
+    --border: 180 50% 25%;
+    --input: 220 26% 12%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom Cyber Gradients */
+    --gradient-cyber: linear-gradient(135deg, hsl(220 26% 6%), hsl(220 26% 12%), hsl(220 26% 8%));
+    --gradient-neon: linear-gradient(135deg, hsl(180 100% 50%), hsl(270 100% 60%), hsl(300 100% 60%));
+    --gradient-hologram: linear-gradient(45deg, hsl(180 100% 50% / 0.1), hsl(270 100% 60% / 0.1), hsl(300 100% 60% / 0.1));
+    
+    /* Shadows and Glows */
+    --shadow-neon: 0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--primary) / 0.3);
+    --shadow-hologram: 0 8px 32px hsl(var(--primary) / 0.2);
+    --shadow-terminal: inset 0 0 20px hsl(var(--muted) / 0.2);
+
+    /* Animation Variables */
+    --transition-cyber: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: all 0.5s ease-in-out;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-rajdhani;
+    background: var(--gradient-cyber);
+  }
+}
+
+@layer components {
+  /* Neon Text Effect */
+  .text-neon {
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+  }
+
+  /* Holographic Card */
+  .card-hologram {
+    background: var(--gradient-hologram);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--card-border) / 0.3);
+    box-shadow: var(--shadow-hologram);
+    transition: var(--transition-cyber);
+  }
+
+  .card-hologram:hover {
+    border-color: hsl(var(--primary) / 0.8);
+    box-shadow: var(--shadow-neon);
+    transform: translateY(-4px);
+  }
+
+  /* Terminal Style */
+  .terminal {
+    background: hsl(var(--popover));
+    border: 2px solid hsl(var(--muted) / 0.5);
+    box-shadow: var(--shadow-terminal);
+    font-family: 'Orbitron', monospace;
+  }
+
+  .terminal:hover {
+    border-color: hsl(var(--muted));
+    box-shadow: 0 0 20px hsl(var(--muted) / 0.4);
+  }
+
+  /* Glitch Animation */
+  .glitch {
+    animation: glitch 2s infinite;
+  }
+
+  @keyframes glitch {
+    0%, 90%, 100% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      transform: translate(-2px, -2px);
+    }
+    60% {
+      transform: translate(2px, 2px);
+    }
+    80% {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  /* Float Animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Pulse Glow */
+  .pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.8), 0 0 60px hsl(var(--primary) / 0.4);
+    }
+  }
+
+  /* Scan Lines Effect */
+  .scan-lines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      transparent 0%,
+      rgba(0, 255, 255, 0.03) 50%,
+      transparent 100%
+    );
+    background-size: 100% 4px;
+    animation: scan 2s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes scan {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+
+  /* Button Ripple Effect */
+  .button-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .button-ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .button-ripple:active::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Cyber Button Glow */
+  .cyber-glow {
+    position: relative;
+  }
+
+  .cyber-glow::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+      hsl(var(--primary)), 
+      hsl(var(--accent)), 
+      hsl(var(--secondary)), 
+      hsl(var(--primary))
+    );
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .cyber-glow:hover::after {
+    opacity: 1;
+  }
+
+  /* Holographic Button Shimmer */
+  .hologram-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hologram-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .hologram-shimmer:hover::before {
+    left: 100%;
+  }
+
+  /* Button Focus Ring */
+  .button-focus:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px hsl(var(--primary) / 0.2);
+  }
+
+  /* Active Button Press Effect */
+  .button-press:active {
+    transform: scale(0.95) translateY(1px);
+    transition: transform 0.1s ease;
+  }
+
+  /* Button Loading State */
+  .button-loading {
+    position: relative;
+    color: transparent;
+  }
+
+  .button-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Fade In Animation */
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Arrow Wave Animation */
+  .animate-arrow-wave {
+    animation: arrowWave 1.5s ease-in-out infinite;
+  }
+
+  @keyframes arrowWave {
+    0%, 100% {
+      transform: translateX(0);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateX(8px);
+      opacity: 1;
+    }
+  }
+}
