@@ -15,6 +15,12 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Cyber Future Variants
+        neon: "bg-gradient-to-r from-primary to-accent text-primary-foreground font-orbitron font-bold border border-primary/50 hover:shadow-neon hover:scale-105 transition-all duration-300",
+        hologram: "bg-gradient-hologram border border-card-border/30 text-foreground backdrop-blur-md hover:border-primary/80 hover:shadow-hologram hover:bg-gradient-to-r hover:from-primary/20 hover:to-accent/20 transition-all duration-300",
+        terminal: "bg-popover border-2 border-muted/50 text-muted-foreground font-orbitron hover:border-muted hover:text-muted hover:shadow-terminal transition-all duration-300",
+        cyber: "bg-gradient-to-r from-secondary to-primary text-secondary-foreground font-orbitron uppercase tracking-wider hover:from-primary hover:to-accent hover:shadow-neon transition-all duration-300",
+        float: "bg-primary/20 border border-primary/50 text-primary backdrop-blur-md hover:bg-primary/30 hover:shadow-neon hover:-translate-y-2 transition-all duration-500 animate-float",
       },
       size: {
         default: "h-10 px-4 py-2",
