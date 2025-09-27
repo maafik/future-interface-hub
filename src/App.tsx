@@ -10,7 +10,7 @@ import { ErrorBoundary } from "react-error-boundary";
 const queryClient = new QueryClient();
 
 // Определяем base path для GitHub Pages
-const basename = import.meta.env.PROD ? "/future-interface-hub" : "";
+const basename = import.meta.env.PROD && import.meta.env.MODE !== "test" ? "/future-interface-hub" : "";
 
 // Компонент для отображения ошибок
 const ErrorFallback = ({ error }: { error: Error }) => (
