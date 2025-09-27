@@ -1,15 +1,16 @@
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { 
-  Monitor, 
-  Palette, 
-  Code, 
-  Megaphone, 
-  Smartphone, 
-  Zap,
-  ChevronRight,
+  Check, 
+  X, 
+  Zap, 
+  Star, 
+  Rocket,
   Terminal,
+  ChevronRight,
   Send,
   User,
   Phone,
@@ -18,43 +19,83 @@ import {
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
-const services = [
+const pricingPlans = [
   {
-    id: "01",
-    title: "ВЕБ-ДИЗАЙН",
-    description: "Современные и красивые веб-сайты с уникальным дизайном и UX/UI",
-    icon: Palette,
-    command: "$ create_web_design --style=modern --responsive=true",
+    id: "basic",
+    name: "БАЗОВЫЙ",
+    price: "от 50,000₽",
+    period: "за проект",
+    description: "Идеально для стартапов и малого бизнеса",
+    icon: Terminal,
+    popular: false,
+    features: [
+      "Адаптивный дизайн",
+      "До 5 страниц",
+      "SEO оптимизация",
+      "Техническая поддержка 1 месяц",
+      "Мобильная версия",
+      "Базовые анимации"
+    ],
+    notIncluded: [
+      "Интеграции с CRM",
+      "Многоязычность",
+      "Админ-панель"
+    ],
+    command: "$ init_project --tier=basic --features=standard"
   },
   {
-    id: "02", 
-    title: "ЛЕНДИНГ СТРАНИЦЫ",
-    description: "Конверсионные landing pages для продуктов и услуг",
-    icon: Monitor,
-    command: "$ build_landing --conversion=high --interactive=true",
+    id: "pro",
+    name: "ПРОФИ",
+    price: "от 150,000₽",
+    period: "за проект",
+    description: "Для растущего бизнеса с расширенными возможностями",
+    icon: Rocket,
+    popular: true,
+    features: [
+      "Все из Базового",
+      "До 15 страниц",
+      "Интеграции с CRM",
+      "Админ-панель",
+      "Многоязычность",
+      "Продвинутые анимации",
+      "Техподдержка 3 месяца",
+      "Аналитика и метрики"
+    ],
+    notIncluded: [
+      "Индивидуальные модули",
+      "Белый лейбл"
+    ],
+    command: "$ init_project --tier=pro --features=advanced"
   },
   {
-    id: "03",
-    title: "МОБИЛЬНЫЕ ПРИЛОЖЕНИЯ", 
-    description: "iOS и Android приложения с современным дизайном",
-    icon: Smartphone,
-    command: "$ develop_mobile_app --platform=cross --ui=modern",
-  },
-  {
-    id: "04",
-    title: "ВЕБ-ПРИЛОЖЕНИЯ",
-    description: "Интерактивные веб-приложения на React и других технологиях",
-    icon: Code,
-    command: "$ init_web_app --framework=react --features=advanced",
-  },
+    id: "enterprise",
+    name: "КОРПОРАТИВНЫЙ",
+    price: "от 300,000₽",
+    period: "за проект",
+    description: "Полноценные решения для крупных компаний",
+    icon: Star,
+    popular: false,
+    features: [
+      "Все из Профи",
+      "Неограниченные страницы",
+      "Индивидуальные модули",
+      "Белый лейбл",
+      "Приоритетная поддержка",
+      "Dedicated менеджер",
+      "Техподдержка 6 месяцев",
+      "Обучение команды"
+    ],
+    notIncluded: [],
+    command: "$ init_project --tier=enterprise --features=unlimited"
+  }
 ];
 
-const Services = () => {
+const Pricing = () => {
   const [activeForm, setActiveForm] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    service: '',
+    plan: '',
     message: ''
   });
   const { toast } = useToast();
@@ -67,7 +108,7 @@ const Services = () => {
     }));
   };
 
-  const handleTelegramSubmit = async (serviceTitle: string) => {
+  const handleTelegramSubmit = async (planName: string, planPrice: string) => {
     if (!formData.name || !formData.phone) {
       toast({
         title: "Ошибка",
@@ -77,11 +118,11 @@ const Services = () => {
       return;
     }
 
-    const telegramMessage = `🆕 Новая заявка на услугу: ${serviceTitle}
+    const telegramMessage = `💰 Заказ тарифного плана: ${planName} (${planPrice})
 
 👤 Имя: ${formData.name}
 📞 Телефон: ${formData.phone}
-${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
+${formData.message ? `💬 Дополнительно: ${formData.message}` : ''}
 
 📱 Номер телефона используется для связи в Telegram, но для быстрее связаться напишите мне в Telegram`;
 
@@ -105,11 +146,11 @@ ${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
       if (response.ok) {
         toast({
           title: "Отлично!",
-          description: "Заявка успешно отправлена в Telegram",
+          description: "Заявка на тариф успешно отправлена в Telegram",
         });
         
         // Сброс формы
-        setFormData({ name: '', phone: '', service: '', message: '' });
+        setFormData({ name: '', phone: '', plan: '', message: '' });
         setActiveForm(null);
       } else {
         throw new Error('Ошибка отправки');
@@ -134,7 +175,7 @@ ${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
   };
 
   return (
-    <section id="services" className="py-20 px-6 relative overflow-hidden">
+    <section id="pricing" className="py-20 px-6 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/50 to-background"></div>
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse"></div>
@@ -144,68 +185,120 @@ ${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
         <div className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 mb-6 text-primary font-orbitron text-sm tracking-widest uppercase">
             <Terminal className="h-4 w-4 animate-pulse-glow" />
-            <span>Системные модули</span>
+            <span>Тарифные планы</span>
             <Terminal className="h-4 w-4 animate-pulse-glow" />
           </div>
           
           <h2 className="text-4xl md:text-6xl font-orbitron font-black text-foreground mb-6">
             <span className="text-neon bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              НАШИ УСЛУГИ
+              ЦЕНЫ И ПАКЕТЫ
             </span>
           </h2>
           
           <p className="text-xl text-foreground/80 font-rajdhani max-w-3xl mx-auto">
-            Специализируемся на веб-дизайне и разработке приложений. Каждый проект — уникальное цифровое решение.
+            Выберите подходящий тариф для вашего проекта. Все цены указаны за полный цикл разработки.
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              className="group terminal p-8 rounded-lg hover:shadow-neon transition-all duration-500 relative overflow-hidden"
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {pricingPlans.map((plan, index) => (
+            <Card
+              key={plan.id}
+              className={`group terminal relative overflow-hidden transition-all duration-500 hover:shadow-neon ${
+                plan.popular 
+                  ? 'border-primary shadow-neon scale-105' 
+                  : 'border-muted/20 hover:border-primary/50'
+              }`}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               {/* Terminal Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-between p-4 border-b border-muted/20">
+                <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-destructive rounded-full"></div>
                   <div className="w-3 h-3 bg-accent rounded-full"></div>
                   <div className="w-3 h-3 bg-muted rounded-full"></div>
                 </div>
-                <span className="text-xs font-orbitron text-muted-foreground tracking-wider">
-                  MODULE_{service.id}
-                </span>
+                <div className="flex items-center space-x-2">
+                  {plan.popular && (
+                    <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30">
+                      <Zap className="h-3 w-3 mr-1" />
+                      ПОПУЛЯРНЫЙ
+                    </Badge>
+                  )}
+                  <span className="text-xs font-orbitron text-muted-foreground tracking-wider">
+                    TIER_{plan.id.toUpperCase()}
+                  </span>
+                </div>
               </div>
 
-              {/* Service Icon */}
-              <div className="relative mb-6">
-                <service.icon className="h-16 w-16 text-primary mx-auto group-hover:text-accent transition-colors duration-300" />
-                <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
+              <CardHeader className="text-center pb-4">
+                {/* Plan Icon */}
+                <div className="relative mb-4">
+                  <plan.icon className="h-12 w-12 text-primary mx-auto group-hover:text-accent transition-colors duration-300" />
+                  <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
 
-              {/* Terminal Command */}
-              <div className="bg-background/20 rounded p-3 mb-4 border border-muted/20">
-                <code className="text-xs font-orbitron text-muted group-hover:text-primary transition-colors">
-                  {service.command}
-                </code>
-              </div>
+                {/* Terminal Command */}
+                <div className="bg-background/20 rounded p-2 mb-4 border border-muted/20">
+                  <code className="text-xs font-orbitron text-muted group-hover:text-primary transition-colors">
+                    {plan.command}
+                  </code>
+                </div>
 
-              {/* Service Details */}
-              <div className="space-y-4">
-                <h3 className="text-xl font-orbitron font-bold text-foreground group-hover:text-primary transition-colors">
-                  {service.title}
-                </h3>
+                <CardTitle className="text-2xl font-orbitron font-bold text-foreground group-hover:text-primary transition-colors">
+                  {plan.name}
+                </CardTitle>
                 
-                <p className="text-foreground/70 font-rajdhani leading-relaxed">
-                  {service.description}
+                <div className="space-y-2">
+                  <div className="text-3xl font-orbitron font-black text-primary">
+                    {plan.price}
+                  </div>
+                  <div className="text-sm text-muted-foreground font-rajdhani">
+                    {plan.period}
+                  </div>
+                </div>
+                
+                <p className="text-foreground/70 font-rajdhani text-sm">
+                  {plan.description}
                 </p>
-              </div>
+              </CardHeader>
 
-              {/* Action */}
-              <div className="mt-8">
-                {activeForm === service.id ? (
+              <CardContent className="space-y-6">
+                {/* Features */}
+                <div className="space-y-3">
+                  <h4 className="font-orbitron font-semibold text-foreground text-sm tracking-wider uppercase">
+                    Включено:
+                  </h4>
+                  {plan.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-center space-x-3">
+                      <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                      <span className="text-sm text-foreground/80 font-rajdhani">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Not Included */}
+                {plan.notIncluded.length > 0 && (
+                  <div className="space-y-3">
+                    <h4 className="font-orbitron font-semibold text-foreground/60 text-sm tracking-wider uppercase">
+                      Не включено:
+                    </h4>
+                    {plan.notIncluded.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-center space-x-3">
+                        <X className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                        <span className="text-sm text-muted-foreground font-rajdhani">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* CTA Button */}
+                {activeForm === plan.id ? (
                   <div className="space-y-4">
                     <div className="space-y-3">
                       <div className="space-y-2">
@@ -256,12 +349,16 @@ ${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
 
                     <div className="flex space-x-2">
                       <Button 
-                        onClick={() => handleTelegramSubmit(service.title)}
-                        variant="terminal" 
-                        className="flex-1 text-xs"
+                        onClick={() => handleTelegramSubmit(plan.name, plan.price)}
+                        variant={plan.popular ? "default" : "terminal"}
+                        className={`flex-1 text-xs ${
+                          plan.popular 
+                            ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
+                            : ''
+                        }`}
                       >
                         <Send className="mr-2 h-3 w-3" />
-                        ОТПРАВИТЬ
+                        ЗАКАЗАТЬ ПЛАН
                       </Button>
                       <Button 
                         onClick={() => setActiveForm(null)}
@@ -289,19 +386,23 @@ ${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
                   </div>
                 ) : (
                   <Button 
-                    onClick={() => setActiveForm(service.id)}
-                    variant="terminal" 
-                    className="w-full group-hover:border-primary group-hover:text-primary"
+                    onClick={() => setActiveForm(plan.id)}
+                    variant={plan.popular ? "default" : "terminal"} 
+                    className={`w-full ${
+                      plan.popular 
+                        ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
+                        : 'group-hover:border-primary group-hover:text-primary'
+                    }`}
                   >
-                    ЗАКАЗАТЬ УСЛУГУ
+                    {plan.popular ? 'ВЫБРАТЬ ПЛАН' : 'ЗАКАЗАТЬ ПРОЕКТ'}
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
                 )}
-              </div>
+              </CardContent>
 
               {/* Glitch Effect on Hover */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-            </div>
+            </Card>
           ))}
         </div>
 
@@ -309,10 +410,10 @@ ${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
         <div className="text-center mt-16 space-y-6">
           <div className="space-y-4">
             <h3 className="text-2xl font-orbitron font-bold text-foreground">
-              Готовы начать проект?
+              Нужен индивидуальный расчет?
             </h3>
             <p className="text-foreground/70 font-rajdhani max-w-2xl mx-auto">
-              Свяжитесь с нами для обсуждения вашего проекта. Отвечу в течение нескольких минут!
+              Свяжитесь с нами для обсуждения вашего проекта. Мы подготовим персональное предложение с учетом всех ваших требований.
             </p>
           </div>
           
@@ -323,7 +424,7 @@ ${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
               size="lg"
               className="group"
             >
-              <MessageCircle className="mr-2 h-5 w-5" />
+              <Rocket className="mr-2 h-5 w-5" />
               СВЯЗАТЬСЯ
             </Button>
             <Button 
@@ -337,10 +438,10 @@ ${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
             </Button>
           </div>
         </div>
-
       </div>
     </section>
   );
 };
 
-export default Services;
+export default Pricing;
+

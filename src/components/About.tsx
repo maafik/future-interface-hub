@@ -216,8 +216,13 @@ const About = () => {
               Давайте создадим что-то невероятное вместе. 
               Обсудим ваши идеи и воплотим их в цифровую реальность.
             </p>
-            <Button variant="cyber" size="lg">
-              <Zap className="mr-2 h-5 w-5" />
+            <Button 
+              variant="cyber" 
+              size="lg"
+              className="group cyber-glow button-ripple button-focus button-press"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <Zap className="mr-2 h-5 w-5 group-hover:animate-pulse" />
               НАЧАТЬ СОТРУДНИЧЕСТВО
             </Button>
           </div>

@@ -41,16 +41,18 @@ const Hero = () => {
           для цифрового будущего вашего бизнеса.
         </p>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-          <Button variant="cyber" size="lg" className="group">
-            <Cpu className="mr-2 h-5 w-5 group-hover:animate-spin" />
-            ЗАПУСТИТЬ ПРОЕКТ
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          
-          <Button variant="hologram" size="lg">
-            ИЗУЧИТЬ СИСТЕМУ
+        {/* Action Button */}
+        <div className="flex items-center justify-center mb-16">
+          <Button 
+            variant="cyber" 
+            size="lg" 
+            className="group cyber-glow button-ripple button-focus button-press relative overflow-hidden transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-primary/50 active:scale-95 active:transition-all active:duration-150"
+            onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <Cpu className="mr-2 h-5 w-5 group-hover:animate-spin transition-transform duration-300" />
+            <span className="relative z-10">ЗАКАЗАТЬ ПРОЕКТ</span>
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
           </Button>
         </div>
 

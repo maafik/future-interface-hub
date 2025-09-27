@@ -35,7 +35,12 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="flex items-center space-x-4">
-            <Button variant="neon" size="lg" className="hidden md:flex">
+            <Button 
+              variant="terminal" 
+              size="lg" 
+              className="hidden md:flex"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               СВЯЗАТЬСЯ
             </Button>
             
