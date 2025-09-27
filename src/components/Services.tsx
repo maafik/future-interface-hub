@@ -13,45 +13,31 @@ import {
 const services = [
   {
     id: "01",
-    title: "ВЕБ-РАЗРАБОТКА",
-    description: "Футуристические веб-приложения с использованием передовых технологий",
-    icon: Monitor,
-    command: "$ init_web_development --mode=future",
+    title: "ВЕБ-ДИЗАЙН",
+    description: "Современные и красивые веб-сайты с уникальным дизайном и UX/UI",
+    icon: Palette,
+    command: "$ create_web_design --style=modern --responsive=true",
   },
   {
     id: "02", 
-    title: "ДИЗАЙН ИНТЕРФЕЙСОВ",
-    description: "Голографические интерфейсы и визуальные системы нового поколения",
-    icon: Palette,
-    command: "$ create_ui_system --style=holographic",
+    title: "ЛЕНДИНГ СТРАНИЦЫ",
+    description: "Конверсионные landing pages для продуктов и услуг",
+    icon: Monitor,
+    command: "$ build_landing --conversion=high --interactive=true",
   },
   {
     id: "03",
     title: "МОБИЛЬНЫЕ ПРИЛОЖЕНИЯ", 
-    description: "Кроссплатформенные приложения с AR/VR интеграцией",
+    description: "iOS и Android приложения с современным дизайном",
     icon: Smartphone,
-    command: "$ build_mobile_app --ar=true --vr=true",
+    command: "$ develop_mobile_app --platform=cross --ui=modern",
   },
   {
     id: "04",
-    title: "БРЕНДИНГ",
-    description: "Создание цифровых брендов для виртуальной реальности",
-    icon: Zap,
-    command: "$ generate_brand --dimension=virtual",
-  },
-  {
-    id: "05",
-    title: "DIGITAL МАРКЕТИНГ",
-    description: "AI-powered маркетинговые кампании и нейросетевая аналитика",
-    icon: Megaphone,
-    command: "$ launch_campaign --ai=enabled --neural=true",
-  },
-  {
-    id: "06",
-    title: "ТЕХНИЧЕСКАЯ ПОДДЕРЖКА",
-    description: "24/7 мониторинг систем и квантовая диагностика",
+    title: "ВЕБ-ПРИЛОЖЕНИЯ",
+    description: "Интерактивные веб-приложения на React и других технологиях",
     icon: Code,
-    command: "$ monitor_systems --quantum=true --24/7=active",
+    command: "$ init_web_app --framework=react --features=advanced",
   },
 ];
 
@@ -78,7 +64,7 @@ const Services = () => {
           </h2>
           
           <p className="text-xl text-foreground/80 font-rajdhani max-w-3xl mx-auto">
-            Выберите модуль для активации. Каждый сервис оптимизирован для максимальной производительности.
+            Специализируемся на веб-дизайне и разработке приложений. Каждый проект — уникальное цифровое решение.
           </p>
         </div>
 
