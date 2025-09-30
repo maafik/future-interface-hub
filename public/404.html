@@ -8,14 +8,17 @@
       // Single Page Apps for GitHub Pages
       // https://github.com/rafgraph/spa-github-pages
       (function(l) {
-        var pathSegmentsToKeep = 0;
-        var l$1 = l;
-        l.replace(
-          l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-          l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-          l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/\/$/, '') +
-          (l.search ? '&' + l.search.slice(1) : '') + l.hash
-        );
+        var path = l.pathname;
+        var search = l.search;
+        var hash = l.hash;
+        var port = l.port ? ':' + l.port : '';
+        var origin = l.protocol + '//' + l.hostname + port;
+        var newUrl = origin + '/?/' + path.replace(/^\//, '');
+        if (search) {
+          newUrl += '&' + search.replace(/^\?/, '').replace(/&/g, '~and~');
+        }
+        newUrl += hash;
+        l.replace(newUrl);
       })(window.location);
     </script>
   </head>

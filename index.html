@@ -17,11 +17,16 @@
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
     <script>
+      // Single Page Apps for GitHub Pages - redirect handler
+      // https://github.com/rafgraph/spa-github-pages
       (function() {
         var l = window.location;
-        if (l.search && l.search.indexOf('/?/') !== -1) {
-          var redirect = l.search.slice(3).split('&')[0];
-          window.history.replaceState(null, null, '/' + redirect + l.hash);
+        if (l.search.startsWith('?/')) {
+          var params = l.search.slice(2).split('&');
+          var pathname = '/' + (params.shift() || '');
+          var search = params.length ? '?' + params.join('&').replace(/~and~/g, '&') : '';
+          var newUrl = pathname + search + l.hash;
+          window.history.replaceState(null, null, newUrl);
         }
       })();
     </script>
