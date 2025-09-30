@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Menu, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -7,15 +8,15 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Neon Logo */}
-          <div className="flex items-center space-x-3">
+          <Link to="/" aria-label="На главную" className="flex items-center space-x-3 cursor-pointer">
             <div className="relative">
               <Zap className="h-8 w-8 text-primary animate-pulse-glow" />
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl animate-pulse-glow"></div>
             </div>
             <h1 className="text-2xl font-orbitron font-black text-primary text-neon tracking-wider glitch">
-              OPEN-ARC
+              QuirkyNest
             </h1>
-          </div>
+          </Link>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">

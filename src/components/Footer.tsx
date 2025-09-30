@@ -1,14 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { 
   Zap, 
-  Github, 
-  Twitter, 
-  Linkedin, 
   Mail,
   MapPin,
   Phone,
   Globe
 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { FaTelegramPlane, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -21,15 +20,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-3 mb-6">
+            <Link to="/" aria-label="На главную" className="flex items-center space-x-3 mb-6">
               <div className="relative">
                 <Zap className="h-8 w-8 text-primary animate-pulse-glow" />
                 <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl animate-pulse-glow"></div>
               </div>
               <h3 className="text-2xl font-orbitron font-black text-primary text-neon tracking-wider">
-                OPEN-ARC
+                QuirkyNest
               </h3>
-            </div>
+            </Link>
             
             <p className="text-foreground/70 font-rajdhani text-lg mb-6 max-w-md">
               Креативное агентство будущего. Создаем голографические решения 
@@ -37,14 +36,20 @@ const Footer = () => {
             </p>
             
             <div className="flex space-x-4">
-              <Button variant="hologram" size="icon">
-                <Github className="h-5 w-5" />
+              <Button asChild variant="hologram" size="icon">
+                <a href="https://t.me/Irisarts1" target="_blank" rel="noreferrer">
+                  <FaTelegramPlane className="h-5 w-5" />
+                </a>
               </Button>
-              <Button variant="hologram" size="icon">
-                <Twitter className="h-5 w-5" />
+              <Button asChild variant="hologram" size="icon">
+                <a href="https://wa.me/79517623467" target="_blank" rel="noreferrer">
+                  <FaWhatsapp className="h-5 w-5" />
+                </a>
               </Button>
-              <Button variant="hologram" size="icon">
-                <Linkedin className="h-5 w-5" />
+              <Button asChild variant="hologram" size="icon">
+                <a href="mailto:Irisarts1@yandex.ru">
+                  <FaEnvelope className="h-5 w-5" />
+                </a>
               </Button>
             </div>
           </div>
@@ -56,19 +61,19 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3">
               {[
-                "Веб-разработка",
-                "UI/UX Дизайн", 
-                "Мобильные приложения",
-                "Брендинг",
-                "Digital маркетинг",
-                "Техподдержка"
+                { label: "Веб-разработка", href: "#services" },
+                { label: "UI/UX Дизайн", href: "#services" },
+                { label: "Мобильные приложения", href: "#services" },
+                { label: "Брендинг", href: "#services" },
+                { label: "Digital маркетинг", href: "#services" },
+                { label: "Техподдержка", href: "#contact" },
               ].map((item, index) => (
                 <li key={index}>
                   <a 
-                    href="#" 
-                    className="text-foreground/70 hover:text-primary transition-colors font-rajdhani hover:translate-x-2 inline-block transition-transform"
+                    href={item.href}
+                    className="text-foreground/70 hover:text-primary transition-colors font-rajdhani hover:translate-x-2 inline-block transition-transform break-words"
                   >
-                    → {item}
+                    → {item.label}
                   </a>
                 </li>
               ))}
@@ -83,16 +88,16 @@ const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-accent" />
-                <span className="text-foreground/70 font-rajdhani">
-                  contact@open-arc.com
-                </span>
+                <a href="mailto:Irisarts1@yandex.ru" className="text-foreground/70 font-rajdhani">
+                  Irisarts1@yandex.ru
+                </a>
               </div>
               
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-accent" />
-                <span className="text-foreground/70 font-rajdhani">
-                  +7 (999) 123-45-67
-                </span>
+                <a href="tel:+79045357052" className="text-foreground/70 font-rajdhani">
+                  +7 904 535-70-52
+                </a>
               </div>
               
               <div className="flex items-center space-x-3">
@@ -135,15 +140,21 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border/20">
           <div className="text-foreground/60 font-rajdhani mb-4 md:mb-0">
-            © 2024 OPEN-ARC CREATIVE. Все права защищены квантовым шифрованием.
+            © 2025 QuirkyNest. Все права защищены.
           </div>
           
-          <div className="flex space-x-6 text-sm">
-            <a href="#" className="text-foreground/60 hover:text-primary transition-colors font-rajdhani">
+          <div className="flex flex-wrap gap-4 md:space-x-6 text-sm">
+            <a href="/privacy" className="text-foreground/60 hover:text-primary transition-colors font-rajdhani">
               Политика конфиденциальности
             </a>
-            <a href="#" className="text-foreground/60 hover:text-primary transition-colors font-rajdhani">
+            <a href="/terms" className="text-foreground/60 hover:text-primary transition-colors font-rajdhani">
               Условия использования
+            </a>
+            <a href="tel:+79045357052" className="text-foreground/60 hover:text-primary transition-colors font-rajdhani">
+              +7 904 535-70-52
+            </a>
+            <a href="mailto:Irisarts1@yandex.ru" className="text-foreground/60 hover:text-primary transition-colors font-rajdhani">
+              Irisarts1@yandex.ru
             </a>
           </div>
         </div>

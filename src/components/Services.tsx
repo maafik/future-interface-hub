@@ -21,31 +21,45 @@ import { useToast } from "@/hooks/use-toast";
 const services = [
   {
     id: "01",
-    title: "ВЕБ-ДИЗАЙН",
-    description: "Современные и красивые веб-сайты с уникальным дизайном и UX/UI",
-    icon: Palette,
-    command: "$ create_web_design --style=modern --responsive=true",
+    title: "Веб-разработка",
+    description: "Сайты и веб‑приложения с упором на скорость и SEO",
+    icon: Code,
+    command: "$ build_web --framework=react --responsive=true",
   },
   {
     id: "02", 
-    title: "ЛЕНДИНГ СТРАНИЦЫ",
-    description: "Конверсионные landing pages для продуктов и услуг",
-    icon: Monitor,
-    command: "$ build_landing --conversion=high --interactive=true",
+    title: "UI/UX Дизайн",
+    description: "Прототипы, дизайн‑системы и удобные интерфейсы",
+    icon: Palette,
+    command: "$ design_ui --system=design-tokens --a11y=true",
   },
   {
     id: "03",
-    title: "МОБИЛЬНЫЕ ПРИЛОЖЕНИЯ", 
-    description: "iOS и Android приложения с современным дизайном",
+    title: "Мобильные приложения", 
+    description: "iOS и Android приложения на современных технологиях",
     icon: Smartphone,
-    command: "$ develop_mobile_app --platform=cross --ui=modern",
+    command: "$ develop_mobile --platform=cross --ui=modern",
   },
   {
     id: "04",
-    title: "ВЕБ-ПРИЛОЖЕНИЯ",
-    description: "Интерактивные веб-приложения на React и других технологиях",
-    icon: Code,
-    command: "$ init_web_app --framework=react --features=advanced",
+    title: "Брендинг",
+    description: "Айдентика, логотипы и бренд‑гайд для вашего бизнеса",
+    icon: Megaphone,
+    command: "$ brand_init --logo=quirkynest --guide=true",
+  },
+  {
+    id: "05",
+    title: "Digital маркетинг",
+    description: "Реклама, контент и аналитика для роста",
+    icon: Megaphone,
+    command: "$ marketing_launch --channels=multi --tracking=true",
+  },
+  {
+    id: "06",
+    title: "Техподдержка",
+    description: "Сопровождение, обновления и мониторинг 24/7",
+    icon: Terminal,
+    command: "$ support_run --uptime=99.9 --sla=pro",
   },
 ];
 
@@ -160,7 +174,7 @@ ${formData.message ? `💬 Сообщение: ${formData.message}` : ''}
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => (
             <div
               key={service.id}
