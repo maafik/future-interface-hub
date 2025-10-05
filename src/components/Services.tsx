@@ -54,13 +54,6 @@ const services = [
     icon: Megaphone,
     command: "$ marketing_launch --channels=multi --tracking=true",
   },
-  {
-    id: "06",
-    title: "Техподдержка",
-    description: "Сопровождение, обновления и мониторинг 24/7",
-    icon: Terminal,
-    command: "$ support_run --uptime=99.9 --sla=pro",
-  },
 ];
 
 const Services = () => {

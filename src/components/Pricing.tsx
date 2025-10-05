@@ -23,7 +23,7 @@ const pricingPlans = [
   {
     id: "basic",
     name: "БАЗОВЫЙ",
-    price: "от 50,000₽",
+    price: "от 20,000₽",
     period: "за проект",
     description: "Идеально для стартапов и малого бизнеса",
     icon: Terminal,
@@ -46,7 +46,7 @@ const pricingPlans = [
   {
     id: "pro",
     name: "ПРОФИ",
-    price: "от 150,000₽",
+    price: "от 120,000₽",
     period: "за проект",
     description: "Для растущего бизнеса с расширенными возможностями",
     icon: Rocket,
@@ -70,7 +70,7 @@ const pricingPlans = [
   {
     id: "enterprise",
     name: "КОРПОРАТИВНЫЙ",
-    price: "от 300,000₽",
+    price: "от 270,000₽",
     period: "за проект",
     description: "Полноценные решения для крупных компаний",
     icon: Star,
