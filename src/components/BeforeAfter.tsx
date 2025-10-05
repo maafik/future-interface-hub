@@ -179,14 +179,11 @@ const projectExamples = [
 
 const BeforeAfter = () => {
   const [activeProject, setActiveProject] = useState(0);
-  const [sliderPosition, setSliderPosition] = useState(50);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const currentProject = projectExamples[activeProject];
 
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSliderPosition(parseInt(e.target.value));
-  };
+  
 
   const nextProject = () => {
     setActiveProject((prev) => (prev + 1) % projectExamples.length);
@@ -224,11 +221,11 @@ const BeforeAfter = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 gap-8 lg:gap-12 items-center justify-items-center">
           {/* Project Selector */}
           <div className="space-y-6">
             {/* Project Navigation */}
-            <div className="flex items-center justify-between mb-6 md:mb-8">
+            <div className="flex items-center justify-center gap-6 mb-6 md:mb-8">
               <Button
                 variant="terminal"
                 onClick={prevProject}
@@ -267,9 +264,9 @@ const BeforeAfter = () => {
             </div>
 
             {/* Current Project Info */}
-            <Card className="terminal group">
-              <CardHeader className="p-4 md:p-6">
-                <div className="flex items-center justify-between mb-4">
+            <Card className="terminal group max-w-3xl w-full">
+              <CardHeader className="p-4 md:p-6 text-center">
+                <div className="flex items-center justify-center mb-4">
                   <div className="flex items-center space-x-2 md:space-x-3">
                     <currentProject.icon className="h-6 w-6 md:h-8 md:w-8 text-primary" />
                     <div>
@@ -278,13 +275,13 @@ const BeforeAfter = () => {
                       </Badge>
                     </div>
                   </div>
-                  <span className="text-xs font-orbitron text-muted-foreground tracking-wider hidden sm:block">
+                  <span className="text-xs font-orbitron text-muted-foreground tracking-wider hidden sm:block ml-4">
                     PROJECT_{currentProject.id.toUpperCase()}
                   </span>
                 </div>
 
                 {/* Terminal Command */}
-                <div className="bg-background/20 rounded p-3 mb-4 border border-muted/20">
+                <div className="bg-background/20 rounded p-3 mb-4 border border-muted/20 inline-block">
                   <code className="text-xs font-orbitron text-muted">
                     {currentProject.command}
                   </code>
@@ -299,13 +296,13 @@ const BeforeAfter = () => {
                 </p>
               </CardHeader>
 
-              <CardContent className="space-y-4 md:space-y-6 p-4 md:p-6">
+              <CardContent className="space-y-4 md:space-y-6 p-4 md:p-6 text-center">
                 {/* Technologies */}
                 <div>
                   <h4 className="font-orbitron font-semibold text-foreground text-xs md:text-sm tracking-wider uppercase mb-2 md:mb-3">
                     Технологии:
                   </h4>
-                  <div className="flex flex-wrap gap-1 md:gap-2">
+                  <div className="flex flex-wrap gap-1 md:gap-2 justify-center">
                     {currentProject.technologies.map((tech, index) => (
                       <Badge key={index} variant="outline" className="border-primary/30 text-primary text-xs">
                         {tech}
@@ -321,7 +318,7 @@ const BeforeAfter = () => {
                   </h4>
                   <div className="space-y-1 md:space-y-2">
                     {currentProject.improvements.map((improvement, index) => (
-                      <div key={index} className="flex items-center space-x-2 md:space-x-3">
+                      <div key={index} className="flex items-center justify-center space-x-2 md:space-x-3">
                         <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-primary flex-shrink-0" />
                         <span className="text-xs md:text-sm text-foreground/80 font-rajdhani">
                           {improvement}
@@ -470,114 +467,7 @@ const BeforeAfter = () => {
             </Card>
           </div>
 
-          {/* Before/After Slider */}
-          <div className="relative mt-8 lg:mt-0">
-            {/* Slider Labels - над картинками */}
-            <div className="mb-4 text-sm font-rajdhani">
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground font-semibold bg-background/80 px-2 py-1 rounded -mt-12">ДО</span>
-                
-                {/* Animated Arrow Hint */}
-                <div className="flex items-center space-x-2 -mt-12">
-                  <div className="flex items-center space-x-1 bg-background/80 px-3 py-1 rounded-full border border-primary/30 shadow-lg">
-                    <span className="text-xs text-primary font-orbitron">ПЕРЕТАЩИ</span>
-                    <ArrowRight className="h-4 w-4 text-primary animate-arrow-wave" />
-                  </div>
-                </div>
-                
-                <span className="text-primary font-semibold bg-background/80 px-2 py-1 rounded -mt-12">Результат</span>
-              </div>
-            </div>
-            
-            <div className="aspect-video rounded-lg overflow-hidden border border-muted/20 bg-background/10">
-              {/* Before Image */}
-              <div 
-                className="absolute inset-0 overflow-hidden"
-                style={{ width: `${sliderPosition}%` }}
-              >
-                <img 
-                  src={currentProject.beforeImage} 
-                  alt="До" 
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    target.parentElement!.innerHTML = `
-                      <div class="w-full h-full bg-gradient-to-br from-muted/20 to-muted/40 flex items-center justify-center">
-                        <div class="text-center">
-                          <svg class="h-16 w-16 text-muted-foreground mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                          </svg>
-                          <p class="text-muted-foreground font-rajdhani">ДО</p>
-                        </div>
-                      </div>
-                    `;
-                  }}
-                />
-              </div>
-
-              {/* After Image */}
-              <div 
-                className="absolute inset-0 overflow-hidden"
-                style={{ width: `${100 - sliderPosition}%`, right: 0 }}
-              >
-                <img 
-                  src={currentProject.afterImage} 
-                  alt="После" 
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    target.parentElement!.innerHTML = `
-                      <div class="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                        <div class="text-center">
-                          <svg class="h-16 w-16 text-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                          </svg>
-                          <p class="text-primary font-rajdhani font-semibold">ПОСЛЕ</p>
-                        </div>
-                      </div>
-                    `;
-                  }}
-                />
-              </div>
-
-              {/* Slider Control */}
-              <div 
-                className="absolute top-0 bottom-0 w-1 bg-primary cursor-ew-resize flex items-center justify-center"
-                style={{ left: `${sliderPosition}%` }}
-              >
-                <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200">
-                  <div className="w-2 h-2 bg-primary-foreground rounded-full"></div>
-                </div>
-              </div>
-
-              {/* Animated Hint Overlay */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div 
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 transition-opacity duration-300"
-                  style={{ left: `${sliderPosition}%` }}
-                >
-                  <div className="bg-primary/20 backdrop-blur-sm rounded-full px-3 py-1 border border-primary/30">
-                    <div className="flex items-center space-x-1">
-                      <ArrowRight className="h-3 w-3 text-primary animate-bounce" />
-                      <span className="text-xs text-primary font-orbitron">← →</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Slider Input */}
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={sliderPosition}
-                onChange={handleSliderChange}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize"
-              />
-            </div>
-          </div>
+          {/* Before/After images removed; text-only content retained */}
         </div>
 
         {/* Bottom CTA */}
